@@ -5,4 +5,5 @@ from transcript import views
 urlpatterns = [
     path ("", views.index , name="home"),
     # path ("work",views.get_name ,name="work")
+    path("vid",views.upload_file,name="converter")
 ]

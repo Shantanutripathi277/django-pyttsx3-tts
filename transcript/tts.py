@@ -4,6 +4,8 @@ import pyttsx3
 ''' TODO-
 change static path to relative path
 home page -routing
+video player
+session control
 submit button sahi krni hogya
 male female hogya
 code saaf
