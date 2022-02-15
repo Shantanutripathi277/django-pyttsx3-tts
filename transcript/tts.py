@@ -20,7 +20,7 @@ def tts(transcript, voicetype):
     else:
         engine.setProperty('voice', voices[0].id)   #changing index, changes voices. 1 for female
     engine.say(transcript)
-    engine.save_to_file(transcript, 'songname.mp3')
+    engine.save_to_file(transcript, 'speech.mp3')
     engine.runAndWait()
-    shutil.move("T:/STUDY/ME/Fosee/django/voice/songname.mp3","T:/STUDY/ME/Fosee/django/voice/static/songname.mp3")
+    shutil.move("T:/STUDY/ME/Fosee/django/voice/speech.mp3","T:/STUDY/ME/Fosee/django/voice/static/speech.mp3")
     return
