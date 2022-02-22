@@ -1,26 +1,18 @@
 import os 
 import shutil 
 import pyttsx3
-''' TODO-
-change static path to relative path
-home page -routing
-video player
-session control
-submit button sahi krni hogya
-male female hogya
-code saaf
-css
-testing
-'''
+
+from voice.settings import BASE_DIR, PROJECT_ROOT
 def tts(transcript, voicetype):
+    print(BASE_DIR,'here')
     engine = pyttsx3.init()
     voices = engine.getProperty('voices') 
     if(voicetype=='1'):      #getting details of current voice
         engine.setProperty('voice', voices[1].id)  #changing index, changes voices. o for male
     else:
         engine.setProperty('voice', voices[0].id)   #changing index, changes voices. 1 for female
-    engine.say(transcript)
-    engine.save_to_file(transcript, 'speech.mp3')
+    engine.say(transcript)   #plays the voice-over
+    engine.save_to_file(transcript, 'speech.mp3') #save the file to speech.mp3
     engine.runAndWait()
-    shutil.move("T:/STUDY/ME/Fosee/django/voice/speech.mp3","T:/STUDY/ME/Fosee/django/voice/static/speech.mp3")
+    shutil.move(str(BASE_DIR)+"\speech.mp3",str(BASE_DIR)+"\static\speech.mp3") #moves the file
     return

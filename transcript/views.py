@@ -65,6 +65,7 @@ def upload_file(request):
 
 
 def signin(request):
+    form = UserForm()
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -74,17 +75,17 @@ def signin(request):
             password=password
         )
         if user is None:
-            return HttpResponse("Invalid credentials.")
+            return render(request, 'login.html', {'form': form,'invalid':"invalid"})
         login(request, user)
         request.session['name'] = username
-        return redirect('/')
+        return redirect('/index')
     else:
         form = UserForm()
         return render(request, 'login.html', {'form': form})
 
 def signout(request):
     logout(request)
-    return redirect('/')
+    return redirect('/login')
 
 def signup(request):
     form=UserRegistrationForm()
@@ -103,8 +104,9 @@ def signup(request):
         )
         try:
             newuser.save()
+            return redirect('/login')
         except:
-            return HttpResponse("Something went wrong.")
+           return render(request, 'signup.html', {'form': form,'invalid':"gonewrong"})
     else:
         form = UserRegistrationForm()
     return render(request, 'signup.html', {'form': form})

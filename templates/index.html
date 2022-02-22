@@ -4,41 +4,77 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
     <body>
+        {% load crispy_forms_tags %}
         {% if form %}
-            <form action="/" method="POST">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="OK">
-            </form>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <h1 class="mt-2">Transcript Form</h1>
+                        <hr class="mt-0 mb-4">
+                        <form action="/index" method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input class="btn btn-success" type="submit" value="OK">
+                        </form>
+                    </div>
+                </div>
+            </div>
         {% endif %}
         <figure>
             {% if src %}
-                <figcaption>
-                    You may listen To the transcript:
-                </figcaption>
-                <audio controls src="{{ src }}">
-                    Your browser does not support the
-                    <code>audio</code> element.
-                </audio>
-                <button onclick="location.href = '/vid'">Now upload the video</button>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-8">
+                            <h1 class="mt-2">Audio Player</h1>
+                            <hr class="mt-0 mb-4">
+                            <figcaption>
+                                You may listen To the transcript:
+                            </figcaption>
+                            <audio controls src="{{ src }}">
+                                Your browser does not support the
+                                <code>audio</code> element.
+                            </audio>
+                            <button class="btn btn-success" onclick="location.href = '/vid'">Now upload the video</button>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </figure>
-        {%if fileform%}
-        <h1>Upload Video</h1>
-        <form action="/vid" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ fileform }}
-            <input type="submit" value="OK">
-        </form>
-        {%endif%}
+        {% if fileform %}
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <h1 class="mt-2">Video Upload Form</h1>
+                        <hr class="mt-0 mb-4">
+                        <form action="/vid" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ fileform|crispy }}
+                            <input class="btn btn-success" type="submit" value="OK">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         {% if vidsrc %}
-            <h1>Play Video</h1>
-            <video name='demo' controls autoplay width='50%' height='40%'>
-                <source src="{{ vidsrc }}" type="video/mp4">
-            </source>
-        </video>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <h1 class="mt-2">Video Player</h1>
+                        <hr class="mt-0 mb-4">
+                        <video name='demo' controls autoplay width='50%' height='40%'>
+                            <source src="{{ vidsrc }}" type="video/mp4">
+                        </source>
+                    </video>
+                </div>
+            </div>
+        </div>
     {% endif %}
 </body>
 </html>
