@@ -18,6 +18,6 @@
 - [ ] Refactor Session Model
 - [ ] Implement Celery tasks
 - [ ] Text to Speech conversion status view 
-      
+- [ ] Testing      
   
   
